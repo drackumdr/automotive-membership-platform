@@ -1,7 +1,7 @@
 # Automotive Membership Platform
 
 Monorepo (nombre provisional) de la plataforma de membresías automotrices.
-Backend FastAPI + PostgreSQL, frontend Flutter Web. Estado: **TASK-001 (esqueleto)**.
+Backend FastAPI + PostgreSQL, frontend Flutter Web. Estado: **TASK-002 (identidad, usuarios, roles y permisos)**.
 
 ## Requisitos
 - Python 3.12+, PostgreSQL 14+ (Windows o Ubuntu)
@@ -13,12 +13,15 @@ cd backend
 python -m venv .venv
 # Windows: .venv\Scripts\activate      Ubuntu: source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # Windows: copy .env.example .env  -> editar DATABASE_URL
+cp .env.example .env        # Windows: copy .env.example .env  -> editar DATABASE_URL y JWT_SECRET
+python -c "import secrets; print(secrets.token_urlsafe(48))"   # úsalo como JWT_SECRET
 ```
 Crear la base en PostgreSQL (ejemplo): `CREATE DATABASE membership_dev;`
 
 ```bash
 alembic upgrade head                      # migraciones
+python -m app.cli seed                    # permisos y roles base (idempotente)
+python -m app.cli create-superadmin --username admin --name "Tu nombre"   # pide la contraseña
 uvicorn app.main:app --reload --port 8000 # API
 pytest -q                                 # pruebas (no requieren PostgreSQL)
 ```
@@ -37,7 +40,7 @@ flutter run -d chrome --web-port 8080 --dart-define=API_BASE_URL=http://localhos
 ## Reglas
 - Sin credenciales en el repo: usar `.env` (ignorado por git). Hay una prueba que lo vigila.
 - Dinero: NUMERIC(14,2). Reglas de negocio en `service.py`, no en routers.
-- Siguiente entrega: **TASK-002 — Identidad, usuarios, roles y permisos**.
+- Siguiente entrega: **TASK-003 — Clientes y vehículos** (Sprint 2).
 
 ## Estructura
 Ver `docs/` y la especificación técnica v1.1. Cada módulo de `backend/app/modules/` tendrá:

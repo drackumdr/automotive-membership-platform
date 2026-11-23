@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -10,7 +11,12 @@ class Settings(BaseSettings):
 
     app_name: str = "Automotive Membership Platform"
     environment: str = "development"
-    database_url: str  # obligatorio, sin valor por defecto: no hay credenciales en el código
+    database_url: str  # obligatorio, sin valor por defecto
+    jwt_secret: str = Field(min_length=32)  # obligatorio; generar con secrets.token_urlsafe(48)
+    access_token_minutes: int = 15
+    refresh_token_days: int = 14
+    max_failed_logins: int = 5
+    lockout_minutes: int = 15
     cors_origins: str = "http://localhost:8080,http://localhost:5000"
     timezone: str = "America/Chihuahua"
 

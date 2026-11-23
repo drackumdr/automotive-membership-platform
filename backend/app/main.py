@@ -4,12 +4,17 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
+from app.core.exceptions import register_exception_handlers
 from app.database import get_db
+from app.modules.identity.router import auth_router, users_router
+from app.modules.organizations.router import router as organizations_router
+
+API_PREFIX = "/api/v1"
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title=settings.app_name, version="0.1.0")
+    app = FastAPI(title=settings.app_name, version="0.2.0")
 
     app.add_middleware(
         CORSMiddleware,
@@ -17,6 +22,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    register_exception_handlers(app)
 
     @app.get("/health", tags=["system"])
     def health(response: Response, db: Session = Depends(get_db)) -> dict:
@@ -34,7 +40,8 @@ def create_app() -> FastAPI:
             "version": app.version,
         }
 
-    # Los routers de cada módulo se registrarán aquí con prefix="/api/v1".
+    for router in (auth_router, users_router, organizations_router):
+        app.include_router(router, prefix=API_PREFIX)
     return app
 
 

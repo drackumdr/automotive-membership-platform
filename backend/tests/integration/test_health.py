@@ -18,7 +18,10 @@ def test_health_database_down(client):
         def close(self):
             pass
 
-    app.dependency_overrides[get_db] = lambda: iter([BrokenSession()])
+    def broken():
+        yield BrokenSession()
+
+    app.dependency_overrides[get_db] = broken
     r = client.get("/health")
     assert r.status_code == 503
     assert r.json()["database"] == "error"

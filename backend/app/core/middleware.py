@@ -1,1 +1,1 @@
-"""Middleware de autenticación y contexto de organización."""
+"""La autenticación se resuelve con dependencias de FastAPI (modules/identity/permissions.py)."""

@@ -7,7 +7,8 @@ from app.config import get_settings
 from app.database import Base
 
 # Importar aquí los models.py de cada módulo para que Alembic los detecte:
-# from app.modules.identity import models as _identity  # noqa: F401
+from app.modules.identity import models as _identity  # noqa: F401
+from app.modules.organizations import models as _organizations  # noqa: F401
 
 config = context.config
 if config.config_file_name is not None:

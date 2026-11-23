@@ -14,6 +14,7 @@ jobs:
           --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
     env:
       DATABASE_URL: postgresql+psycopg://postgres:ci_only@localhost:5432/membership_test
+      JWT_SECRET: ci-only-jwt-key-not-used-anywhere-else-0123456789
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
