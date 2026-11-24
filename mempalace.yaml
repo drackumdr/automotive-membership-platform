@@ -1,0 +1,54 @@
+wing: taller
+rooms:
+- name: backend
+  description: API FastAPI, módulos de dominio, migraciones Alembic y CLI
+  keywords:
+  - backend
+  - fastapi
+  - alembic
+  - migrations
+  - identity
+  - organizations
+  - modules
+- name: frontend
+  description: Aplicación Flutter Web + PWA (frontend/)
+  keywords:
+  - frontend
+  - flutter
+  - dart
+  - pubspec
+- name: testing
+  description: Pruebas unitarias, de integración y de seguridad
+  keywords:
+  - tests
+  - test
+  - pytest
+- name: deployment
+  description: Configuración de despliegue Nginx, systemd y workflows CI
+  keywords:
+  - deployment
+  - nginx
+  - systemd
+  - workflows
+- name: mockups
+  description: Prototipos y mockups HTML interactivos de la plataforma
+  keywords:
+  - mockup
+  - html
+  - autoserv
+  - deepseek
+  - index
+- name: docs
+  description: Documentación funcional, arquitectura y reglas de agentes
+  keywords:
+  - docs
+  - agents
+  - claude
+  - copilot
+  - readme
+  - changelog
+  - security
+  - conventions
+- name: general
+  description: Configuración y archivos generales del proyecto
+  keywords: []

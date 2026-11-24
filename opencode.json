@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "instructions": ["AGENTS.md"],
+
+  "plugin": [
+    "@dietrichgebert/ponytail"
+  ],
+
+  "mcp": {
+    "mempalace": {
+      "type": "local",
+      "command": ["mempalace-mcp"],
+      "enabled": true
+    }
+  },
+
+  "command": {
+    "test": {
+      "description": "Corre la verificación del repo",
+      "template": "Sigue la sección \"Verificar antes de dar por terminado\" de AGENTS.md: corre la verificación del repo y si algo falla, arréglalo antes de continuar. Resume qué pasó."
+    }
+  }
+}
